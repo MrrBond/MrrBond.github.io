@@ -469,6 +469,14 @@
 				}
 				//If a glyph is the last in the sequence (of four or five glyphs), change to the first glyph
 				else if(glyph == diff){
+					glyph++;
+					glyphPos[pid] = glyph;
+					document.getElementById("g"+pid).src = "Pics/Glyph0.png";
+					/*glyph = 1;
+					glyphPos[pid] = glyph;
+					document.getElementById("g"+pid).src = "Pics/Glyph"+chosenGlyphs[glyph-1]+".png";*/
+				}
+				else if(glyph > diff){
 					glyph = 1;
 					glyphPos[pid] = glyph;
 					document.getElementById("g"+pid).src = "Pics/Glyph"+chosenGlyphs[glyph-1]+".png";
