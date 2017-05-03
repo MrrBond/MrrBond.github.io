@@ -53,6 +53,7 @@
 			var check = 0;
 			var check2 = 0;
 			var check3 = 0;
+			var isTry = 0;
 			
 			var hidden = 0;
 			var hideGlyphs = [0];
@@ -91,6 +92,9 @@
 				}
 				console.log(chosenGlyphs);
 				console.log(glyphPics);
+				if(isTry == 1){
+					document.getElementById("subClick").src = "Pics/ButtonSubText.png";
+				}
 				
 				//BIG LOOP
 				do{
@@ -471,6 +475,9 @@
 				}
 				console.log(glyph, "--");
 				console.log(glyphPos[pid])
+				if(isTry == 1){
+					document.getElementById("subClick").src = "Pics/ButtonSubText.png";
+				}
 			}
 			
 			//When submit is clicked, check to see if each displayed glyph matches the actual glyph
@@ -558,7 +565,14 @@
 				if(isCorrect == 3){
 					document.getElementById("board").innerHTML = '<img src = "Pics/Success.png">';
 					document.getElementById("board").style.margin = "365px 0px 63px 0px";
+					document.getElementById("subClick").src = "Pics/ButtonSubText.png";
 					console.log("WINNER!");
+				}
+				
+				else{
+					console.log("change");
+					document.getElementById("subClick").src = "Pics/tryAgain.png";
+					isTry = 1;
 				}
 				
 				/*var columns = [0, 0, 0, 0];
@@ -606,13 +620,13 @@
 				console.log(difficulty);
 			}
 			
-			function loadScreen(){
+			/*function loadScreen(){
 				if(difficulty == 5){
 					document.getElementById("board").innerHTML = '<img src = "Pics/Loading.png">';
 					document.getElementById("board").style.margin = "365px 0px 63px 0px";
 					console.log("loadingggggggggggggggg");
 				}
-			}
+			}*/
 			
 		</script>
 		
@@ -625,7 +639,7 @@
 		</div>
 		<div class = "buttons" id = "threeButtons" align = "center">
 			<input class = "click1" type = "image" onclick = "NewBoard()" img src = "Pics/ButtonNewText.png">
-			<input class = "click2" type = "image" onclick = "checkSolution()" img src = "Pics/ButtonSubText.png">
+			<input class = "click2" id = "subClick" type = "image" onclick = "checkSolution()" img src = "Pics/ButtonSubText.png">
 			<input type = "image" onclick = "changeDifficulty()" img src = "Pics/ButtonDiffText.png">
 		</div>
 		<p id = "stuff"></p>
