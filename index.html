@@ -45,6 +45,10 @@
 			var Box5 = 0;
 			
 			var x;
+			var y;
+			var lineFour_Five;
+			var container;
+			var boxOfFive;
 			var runs = 0;
 			var check = 0;
 			var check2 = 0;
@@ -62,6 +66,7 @@
 			
 			var difficulty = 4;
 			var totalGlyphs = 16;
+			var tempCheck = 0;
 			
 			function NewBoard(){
 				for(x = 0; x < 15; x++){
@@ -87,66 +92,104 @@
 				console.log(chosenGlyphs);
 				console.log(glyphPics);
 				
-				//
+				//BIG LOOP
 				do{
-					ArrA1 = [0,0,0,0,20];//===========================?????Diff
-					if(difficulty == 4){
-						Nums = [1, 2, 3, 4];//========================????Diff
-					}
-					else if(difficulty == 5){
-						Nums = [1, 2, 3, 4, 5];
-					}
 					check3 = 0;
 					hideGlyphs = [0];
 					glyphPos = [0];
 					gLoopCheck = 0;
-					//First line of numbers/glyphs. No need for double checks.
-					//Chooses a number from an array of numbers at random and takes it out of the array.
-					for (x = 0; x < difficulty; x++){//=================================Diff
-						ArrA1[x] = Nums[Math.floor(Math.random() * Nums.length)];
-						Nums.splice(Nums.indexOf(ArrA1[x]), 1);
-						console.log(ArrA1[x]);
-					}
-				console.log("---");
-					//Second line of numbers/glyphs. Need to double check for column duplicates
+					lineFour_Five = 0;
+					//BOX_____________ONE
 					do{
+						boxOfFive = [1, 2, 3, 4, 5];
+						ArrA1 = [0,0,0,0,20];
 						if(difficulty == 4){
-							Nums = [1, 2, 3, 4];//=============================?????DIff
+							Nums = [1, 2, 3, 4];
 						}
 						else if(difficulty == 5){
 							Nums = [1, 2, 3, 4, 5];
 						}
-						ArrB1 = [0, 0, 0, 0, 21];//==========================????Diff
-						for (x = 0; x < difficulty; x++){//=======================Diff
-							do{
-								ArrB1[x] = Nums[Math.floor(Math.random() * Nums.length)];
-								runs++;
-								//Sometimes the for loop only leaves on possible number that will always be the same as the one above.
-								//So this checks to see if the last numbers are the same and will break the loop.
-								//Avoids infinite loop.
-								if(ArrB1[(difficulty - 1)] == ArrA1[(difficulty - 1)]){//============================
-									break;
+						
+						//First line of numbers/glyphs. No need for double checks.
+						//Chooses a number from an array of numbers at random and takes it out of the array.
+						for (x = 0; x < difficulty; x++){
+							ArrA1[x] = Nums[Math.floor(Math.random() * Nums.length)];
+							Nums.splice(Nums.indexOf(ArrA1[x]), 1);
+							console.log(ArrA1[x]);
+						}
+					console.log("---");
+						//Second line of numbers/glyphs. Need to double check for column duplicates
+						do{
+							if(difficulty == 4){
+								Nums = [1, 2, 3, 4];
+							}
+							else if(difficulty == 5){
+								Nums = [1, 2, 3, 4, 5];
+							}
+							ArrB1 = [0, 0, 0, 0, 21];
+							for (x = 0; x < difficulty; x++){
+								do{
+									ArrB1[x] = Nums[Math.floor(Math.random() * Nums.length)];
+									runs++;
+									//Sometimes the for loop only leaves on possible number that will always be the same as the one above.
+									//So this checks to see if the last numbers are the same and will break the loop.
+									//Avoids infinite loop.
+									if(ArrB1[(difficulty - 1)] == ArrA1[(difficulty - 1)]){
+										break;
+									}
+								}
+								//This checks each number with the one above and if they are the same, choose a different number.
+								while(ArrB1[x] == ArrA1[x]);
+								Nums.splice(Nums.indexOf(ArrB1[x]), 1);
+								console.log(ArrB1[x]);
+							}
+						}
+						//If the last numbers are the same, start over and choose 4 different numbers.
+						while(ArrB1[(difficulty - 1)] == ArrA1[(difficulty - 1)]);
+						
+						if(difficulty == 4){
+							Box1 = 15;
+							boxOfFive = [];
+						}
+						else if(difficulty == 5){
+							Box1 = ArrA1[0] + ArrA1[1] + ArrA1[2] + ArrB1[0] + ArrB1[1];
+							for(y = 0; y < 5; y++){
+								if(y == 0){
+									container = ArrA1[0];
+								}
+								else if(y == 1){
+									container = ArrA1[1];
+								}
+								else if(y == 2){
+									container = ArrA1[2];
+								}
+								else if(y == 3){
+									container = ArrB1[0];
+								}
+								else if(y == 4){
+									container = ArrB1[1];
+								}
+								for(x = 0; x < boxOfFive.length; x++){
+									if(boxOfFive[x] == container){
+										boxOfFive.splice(boxOfFive.indexOf(container), 1)
+									}
 								}
 							}
-							//This checks each number with the one above and if they are the same, choose a different number.
-							while(ArrB1[x] == ArrA1[x]);
-							Nums.splice(Nums.indexOf(ArrB1[x]), 1);
-							console.log(ArrB1[x]);
 						}
 					}
-					//If the last numbers are the same, start over and choose 4 different numbers.
-					while(ArrB1[(difficulty - 1)] == ArrA1[(difficulty - 1)]);//================================
+					while((Box1 != 15) || (boxOfFive.length != 0));
+					
 				console.log("---2");
 					//Third line of numbers/glyphs
 					do{
 						if(difficulty == 4){
-							Nums = [1, 2, 3, 4];//========================???Diff
+							Nums = [1, 2, 3, 4];
 						}
 						else if(difficulty == 5){
 							Nums = [1, 2, 3, 4, 5];
 						}
-						ArrC1 = [0, 0, 0, 0, 22];//=====================================???Diff
-						for (x = 0; x < difficulty; x++){//==============================Diff
+						ArrC1 = [0, 0, 0, 0, 22];
+						for (x = 0; x < difficulty; x++){
 							do{
 								ArrC1[x] = Nums[Math.floor(Math.random() * Nums.length)];
 								runs++;
@@ -156,7 +199,7 @@
 								//Extra check to avoid another infinite loop
 								if((ArrC1[3] == ArrA1[3]) || (ArrC1[3] == ArrB1[3])){
 									break;
-								}//======================================
+								}
 								if(difficulty == 5){
 									if((ArrC1[4] == ArrA1[4]) || (ArrC1[4] == ArrB1[4])){
 										break;
@@ -171,45 +214,66 @@
 					}
 					while((ArrC1[2] == ArrA1[2]) || (ArrC1[2] == ArrB1[2]) || (ArrC1[3] == ArrA1[3]) || (ArrC1[3] == ArrB1[3]) || (ArrC1[4] == ArrA1[4]) || (ArrC1[4] == ArrB1[4]));//=====================Diff
 				console.log("---3");
+					
 					//Fourth line of numbers/glyphs
 					do{
+						lineFour_Five = 0;
 						if(difficulty == 4){
-							Nums = [1, 2, 3, 4];//==============================Diff
+							Nums = [1, 2, 3, 4];
 						}
 						else if(difficulty == 5){
 							Nums = [1, 2, 3, 4, 5];
 						}
-						ArrD1 = [0, 0, 0, 0, 23];//=============================DIff
-						for (x = 0; x < difficulty; x++){//==============================Diff
+						ArrD1 = [0, 0, 0, 0, 23];
+						for (x = 0; x < difficulty; x++){
 							do{
 								ArrD1[x] = Nums[Math.floor(Math.random() * Nums.length)];
 								runs++;
-								if((ArrD1[1] == ArrA1[1]) || (ArrD1[1] == ArrB1[1]) || (ArrD1[1] == ArrC1[1])){//=======================
+								if((ArrD1[1] == ArrA1[1]) || (ArrD1[1] == ArrB1[1]) || (ArrD1[1] == ArrC1[1])){
 									break;
 								}
-								if((ArrD1[2] == ArrA1[2]) || (ArrD1[2] == ArrB1[2]) || (ArrD1[2] == ArrC1[2])){//=======================
+								else if((ArrD1[2] == ArrA1[2]) || (ArrD1[2] == ArrB1[2]) || (ArrD1[2] == ArrC1[2])){
 									break;
 								}
-								if((ArrD1[3] == ArrA1[3]) || (ArrD1[3] == ArrB1[3]) || (ArrD1[3] == ArrC1[3])){//=======================
+								else if((ArrD1[3] == ArrA1[3]) || (ArrD1[3] == ArrB1[3]) || (ArrD1[3] == ArrC1[3])){
 									break;
 								}
-								if(difficulty == 5){
+								else if(difficulty == 5){
 									if((ArrD1[4] == ArrA1[4]) || (ArrD1[4] == ArrB1[4]) || (ArrD1[4] == ArrC1[4])){
 										break;
 									}
 								}
-								console.log("check");//+++++++++++++++++++++++++++
+								console.log("check");
 							}
-							while((ArrD1[x] == ArrA1[x]) || (ArrD1[x] == ArrB1[x]) || (ArrD1[x] == ArrC1[x]));//======================
+							while((ArrD1[x] == ArrA1[x]) || (ArrD1[x] == ArrB1[x]) || (ArrD1[x] == ArrC1[x]));
 							Nums.splice(Nums.indexOf(ArrD1[x]), 1);
 							console.log(ArrD1[x]);
 						}
+						if(difficulty == 5){
+							if((ArrD1[4] == ArrA1[4]) || (ArrD1[4] == ArrB1[4]) || (ArrD1[4] == ArrC1[4])){
+								lineFour_Five = 1;
+								continue;
+							}
+							else if((ArrD1[3] == ArrA1[3]) || (ArrD1[3] == ArrB1[3]) || (ArrD1[3] == ArrC1[3])){
+								lineFour_Five = 1;
+								continue;
+							}
+							else if((ArrD1[2] == ArrA1[2]) || (ArrD1[2] == ArrB1[2]) || (ArrD1[2] == ArrC1[2])){
+								lineFour_Five = 1;
+								continue;
+							}
+							else if((ArrD1[1] == ArrA1[1]) || (ArrD1[1] == ArrB1[1]) || (ArrD1[1] == ArrC1[1])){
+								lineFour_Five = 1;
+								continue;
+							}
+						}
 					}
-					while((ArrD1[difficulty - 1] == ArrA1[difficulty - 1]) || (ArrD1[x] == ArrB1[difficulty - 1]) || (ArrD1[difficulty - 1] == ArrC1[difficulty - 1]));//==============================
+					while((ArrD1[difficulty - 1] == ArrA1[difficulty - 1]) || (ArrD1[difficulty - 1] == ArrB1[difficulty - 1]) || (ArrD1[difficulty - 1] == ArrC1[difficulty - 1]) || (lineFour_Five == 1));//==============================
 				console.log("---4")
 					//Fifth line of glyphs (if applicable)
 					if(difficulty == 5){
 						do{
+							lineFour_Five = 0;
 							Nums = [1, 2, 3, 4, 5];
 							ArrE1 = [0, 0, 0, 0, 24];
 							for (x = 0; x < difficulty; x++){
@@ -219,13 +283,13 @@
 									if((ArrE1[1] == ArrA1[1]) || (ArrE1[1] == ArrB1[1]) || (ArrE1[1] == ArrC1[1]) || (ArrE1[1] == ArrD1[1])){
 										break;
 									}
-									if((ArrE1[2] == ArrA1[2]) || (ArrE1[2] == ArrB1[2]) || (ArrE1[2] == ArrC1[2]) || (ArrE1[2] == ArrD1[2])){
+									else if((ArrE1[2] == ArrA1[2]) || (ArrE1[2] == ArrB1[2]) || (ArrE1[2] == ArrC1[2]) || (ArrE1[2] == ArrD1[2])){
 										break;
 									}
-									if((ArrE1[3] == ArrA1[3]) || (ArrE1[3] == ArrB1[3]) || (ArrE1[3] == ArrC1[3]) || (ArrE1[3] == ArrD1[3])){
+									else if((ArrE1[3] == ArrA1[3]) || (ArrE1[3] == ArrB1[3]) || (ArrE1[3] == ArrC1[3]) || (ArrE1[3] == ArrD1[3])){
 										break;
 									}
-									if((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4])){
+									else if((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4])){
 										break;
 									}
 								}
@@ -233,16 +297,34 @@
 								Nums.splice(Nums.indexOf(ArrE1[x]), 1);
 								console.log(ArrE1[x]);
 							}
+						
+							if((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4])){
+								lineFour_Five = 1;
+								continue;
+							}
+							else if((ArrE1[3] == ArrA1[3]) || (ArrE1[3] == ArrB1[3]) || (ArrE1[3] == ArrC1[3]) || (ArrE1[3] == ArrD1[3])){
+								lineFour_Five = 1;
+								continue;
+							}
+							else if((ArrE1[2] == ArrA1[2]) || (ArrE1[2] == ArrB1[2]) || (ArrE1[2] == ArrC1[2]) || (ArrE1[2] == ArrD1[2])){
+								lineFour_Five = 1;
+								continue;
+							}
+							else if((ArrE1[1] == ArrA1[1]) || (ArrE1[1] == ArrB1[1]) || (ArrE1[1] == ArrC1[1]) || (ArrE1[1] == ArrD1[1])){
+								lineFour_Five = 1;
+								continue;
+							}
 						}
-						while((ArrE1[4] == ArrA1[4]) || (ArrE1[x] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4]));
+						while(lineFour_Five == 1);
+						//while((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4]));
 					}
 				console.log("---5");
 					if(difficulty == 4){
 						Box1 = ArrA1[0] + ArrA1[1] + ArrB1[0] + ArrB1[1];
 						Box2 = ArrA1[2] + ArrA1[3] + ArrB1[2] + ArrB1[3];
 						Box3 = ArrC1[0] + ArrC1[1] + ArrD1[0] + ArrD1[1];
-						Box4 = ArrC1[2] + ArrC1[3] + ArrD1[2] + ArrD1[3];//=========================================Diff
-						if((Box1 == 10) && (Box2 == 10) && (Box3 == 10) && (Box4 == 10)){//====================================Diff
+						Box4 = ArrC1[2] + ArrC1[3] + ArrD1[2] + ArrD1[3];
+						if((Box1 == 10) && (Box2 == 10) && (Box3 == 10) && (Box4 == 10)){
 							check3 = 1;
 						}
 					}
@@ -254,13 +336,22 @@
 						Box4 = ArrC1[0] + ArrD1[0] + ArrD1[1] + ArrE1[0] + ArrE1[1];
 						Box5 = ArrD1[3] + ArrD1[4] + ArrE1[2] + ArrE1[3] + ArrE1[4];
 						console.log("__________________________"+Box1+" "+Box2+" "+Box3+" "+Box4+" "+Box5+"__________CHECKING BOXES");
-						if((Box1 == 15) && (Box2 == 15) && (Box3 == 15) && (Box4 == 15) && (Box5 == 15)){//====================================Diff
+						if((Box1 == 15) && (Box2 == 15) && (Box3 == 15) && (Box4 == 15) && (Box5 == 15)){
 							check3 = 1;
 							console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Should Move ON");
 						}
+						if((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4])){
+							check3 = 0;
+						}
+						else if((ArrE1[3] == ArrA1[3]) || (ArrE1[3] == ArrB1[3]) || (ArrE1[3] == ArrC1[3]) || (ArrE1[3] == ArrD1[3])){
+							check3 = 0;
+						}
+						else if((ArrE1[2] == ArrA1[2]) || (ArrE1[2] == ArrB1[2]) || (ArrE1[2] == ArrC1[2]) || (ArrE1[2] == ArrD1[2])){
+							check3 = 0;
+						}
 					}
 				
-					/*if((Box1 == 10) && (Box2 == 10) && (Box3 == 10) && (Box4 == 10)){//====================================Diff
+					/*if((Box1 == 10) && (Box2 == 10) && (Box3 == 10) && (Box4 == 10)){
 						check3 = 1;
 					}*/
 				}
@@ -272,14 +363,14 @@
 				console.log(ArrD1);
 				console.log(ArrE1);
 				
-				for(x = 0; x < (totalGlyphs - 1); x++){//================================
+				for(x = 0; x < (totalGlyphs - 1); x++){
 					hideGlyphs.push(x + 1);
 					glyphPos[x] = x;
 					glyphPos.push(x + 1);
 					console.log(glyphPos[x]);
 				}
 				if(difficulty == 4){
-					hidden = Math.floor(Math.random() * 3) + 10;//======================Diff
+					hidden = Math.floor(Math.random() * 3) + 10;
 				}
 				else{
 					hidden = Math.floor(Math.random() * 4) + 16;
@@ -290,7 +381,7 @@
 				}
 				
 				for(x = 0; x < totalGlyphs; x++){
-					if(glyphPos[x] >= 0 && glyphPos[x] < difficulty){//=====================
+					if(glyphPos[x] >= 0 && glyphPos[x] < difficulty){
 						if(glyphPos[x] == hideGlyphs[gLoopCheck]){
 							glyphPos[x] = ArrA1[x];
 							gLoopCheck++;
@@ -299,7 +390,7 @@
 							glyphPos[x] = 0;
 						}
 					}
-					else if(glyphPos[x] >= difficulty && glyphPos[x] < (difficulty * 2)){//==============================
+					else if(glyphPos[x] >= difficulty && glyphPos[x] < (difficulty * 2)){
 						if(glyphPos[x] == hideGlyphs[gLoopCheck]){
 							glyphPos[x] = ArrB1[x - difficulty];
 							gLoopCheck++;
@@ -308,7 +399,7 @@
 							glyphPos[x] = 0;
 						}
 					}
-					else if(glyphPos[x] >= (difficulty * 2) && glyphPos[x] < (difficulty * 3)){//===========================
+					else if(glyphPos[x] >= (difficulty * 2) && glyphPos[x] < (difficulty * 3)){
 						if(glyphPos[x] == hideGlyphs[gLoopCheck]){
 							glyphPos[x] = ArrC1[x - (difficulty * 2)];
 							gLoopCheck++;
@@ -317,7 +408,7 @@
 							glyphPos[x] = 0;
 						}
 					}
-					else if(glyphPos[x] >= (difficulty * 3) && glyphPos[x] < (difficulty * 4)){//=====================================
+					else if(glyphPos[x] >= (difficulty * 3) && glyphPos[x] < (difficulty * 4)){
 						if(glyphPos[x] == hideGlyphs[gLoopCheck]){
 							glyphPos[x] = ArrD1[x - (difficulty * 3)];
 							gLoopCheck++;
@@ -325,7 +416,7 @@
 						else{
 							glyphPos[x] = 0;
 						}
-					}//===================================
+					}
 					else{
 						if(glyphPos[x] == hideGlyphs[gLoopCheck]){
 							glyphPos[x] = ArrE1[x - (difficulty * 4)];
@@ -347,7 +438,7 @@
 				}
 				//Go through each glyph and if it is switchable, add a button that allows it to be switched
 				//and if it is static, display it and make it red and unclickable
-				for(x = 0; x < (totalGlyphs - 1); x++){//=========================================================Diff
+				for(x = 0; x < (totalGlyphs - 1); x++){
 					if(glyphPos[x + 1] == 0){
 						document.getElementById("board").innerHTML += '<input type = "image" id = "g'+(x+1)+'" style = "height: 55px" onclick = "glyphCycle(glyphPos['+(x+1)+'], '+(x+1)+', difficulty)" img src = "Pics/Glyph0.png">';
 					}
@@ -356,7 +447,7 @@
 						document.getElementById("g"+(x+1)).style.color = "Red";
 					}
 					//After four glyph buttons make a new line
-					if((x + 2) % difficulty == 0){//=================================================Diff
+					if((x + 2) % difficulty == 0){
 						document.getElementById("board").innerHTML += "<br>"
 					}
 					console.log(glyphPos[x], "---", x);
@@ -432,8 +523,34 @@
 						isCorrect++;
 					}
 				}
-				else{
-				
+				else if(difficulty == 5){
+					RA = glyphPos[0] + glyphPos[1] + glyphPos[2] + glyphPos[3] + glyphPos[4];
+					RB = glyphPos[5] + glyphPos[6] + glyphPos[7] + glyphPos[8] + glyphPos[9];
+					RC = glyphPos[10] + glyphPos[11] + glyphPos[12] + glyphPos[13] + glyphPos[14];
+					RD = glyphPos[15] + glyphPos[16] + glyphPos[17] + glyphPos[18] + glyphPos[19];
+					RE = glyphPos[20] + glyphPos[21] + glyphPos[22] + glyphPos[23] + glyphPos[24];
+					
+					CA = glyphPos[0] + glyphPos[5] + glyphPos[10] + glyphPos[15] + glyphPos[20];
+					CB = glyphPos[1] + glyphPos[6] + glyphPos[11] + glyphPos[16] + glyphPos[21];
+					CC = glyphPos[2] + glyphPos[7] + glyphPos[12] + glyphPos[17] + glyphPos[22];
+					CD = glyphPos[3] + glyphPos[8] + glyphPos[13] + glyphPos[18] + glyphPos[23];
+					CE = glyphPos[4] + glyphPos[9] + glyphPos[14] + glyphPos[19] + glyphPos[24];
+					
+					B1 = glyphPos[0] + glyphPos[1] + glyphPos[2] + glyphPos[5] + glyphPos[6];
+					B2 = glyphPos[3] + glyphPos[4] + glyphPos[8] + glyphPos[9] + glyphPos[14];
+					B3 = glyphPos[7] + glyphPos[11] + glyphPos[12] + glyphPos[13] + glyphPos[17];
+					B4 = glyphPos[10] + glyphPos[15] + glyphPos[16] + glyphPos[20] + glyphPos[21];
+					B5 = glyphPos[18] + glyphPos[19] + glyphPos[22] + glyphPos[23] + glyphPos[24];
+					
+					if((CA == 15) && (CB == 15) && (CC == 15) && (CD == 15) && (CE == 15)){
+						isCorrect++;
+					}
+					if((RA == 15) && (RB == 15) && (RC == 15) && (RD == 15) && (RE == 15)){
+						isCorrect++;
+					}
+					if((B1 == 15) && (B2 == 15) && (B3 == 15) && (B4 == 15) && (B5 == 15)){
+						isCorrect++;
+					}
 				}
 				
 				console.log("========", isCorrect);
