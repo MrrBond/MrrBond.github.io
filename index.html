@@ -14,10 +14,10 @@
 				margin-bottom: 88px;
 			}
 			.click1 {
-				margin-right: 110px;
+				margin-right: 92px;
 			}
 			.click2 {
-				margin-right: 70px;
+				margin-right: 90px;
 			}
 		</style>
 		
@@ -75,10 +75,10 @@
 					GPInit[x + 1] = x + 1;
 				}
 				if(difficulty == 4){
-					document.getElementById("board").style.margin = "398px 0px 88px 0px";
+					document.getElementById("board").style.margin = "399px 0px 87px 0px";
 				}
 				else{
-					document.getElementById("board").style.margin = "366px 0px 61px 0px";
+					document.getElementById("board").style.margin = "370px 0px 57px 0px";
 				}
 
 				//Choose four or five glyphs to use for the puzzle, out of 16 glyph images
@@ -412,20 +412,20 @@
 				
 				//Check if the first glyph is switchable or static(red)
 				if(glyphPos[0] == 0){
-					document.getElementById("board").innerHTML = '<input type = "image" id = "g0" style = "height: 55px" onclick = "glyphCycle(glyphPos[0], 0, difficulty)" img src = "Pics/Glyph0.png">';
+					document.getElementById("board").innerHTML = '<input type = "image" id = "g0" style = "height: 55px; margin-right: 4px" onclick = "glyphCycle(glyphPos[0], 0, difficulty)" img src = "Pics/Glyph0.png">';
 				}
 				else{
-					document.getElementById("board").innerHTML = '<input type = "image" id = "g0" style = "height: 55px" img src = "Pics/RGlyph'+chosenGlyphs[glyphPos[0]-1]+'.png">';
+					document.getElementById("board").innerHTML = '<input type = "image" id = "g0" style = "height: 55px; margin-right: 4px" img src = "Pics/RGlyph'+chosenGlyphs[glyphPos[0]-1]+'.png">';
 					document.getElementById("g0").style.color = "Red";
 				}
 				//Go through each glyph and if it is switchable, add a button that allows it to be switched
 				//and if it is static, display it and make it red and unclickable
 				for(x = 0; x < (totalGlyphs - 1); x++){
 					if(glyphPos[x + 1] == 0){
-						document.getElementById("board").innerHTML += '<input type = "image" id = "g'+(x+1)+'" style = "height: 55px" onclick = "glyphCycle(glyphPos['+(x+1)+'], '+(x+1)+', difficulty)" img src = "Pics/Glyph0.png">';
+						document.getElementById("board").innerHTML += '<input type = "image" id = "g'+(x+1)+'" style = "height: 55px; margin-right: 4px" onclick = "glyphCycle(glyphPos['+(x+1)+'], '+(x+1)+', difficulty)" img src = "Pics/Glyph0.png">';
 					}
 					else{
-						document.getElementById("board").innerHTML += '<input type = "image" id = "g'+(x+1)+'" style = "height: 55px" img src = "Pics/RGlyph'+chosenGlyphs[glyphPos[x + 1]-1]+'.png">';
+						document.getElementById("board").innerHTML += '<input type = "image" id = "g'+(x+1)+'" style = "height: 55px; margin-right: 4px" img src = "Pics/RGlyph'+chosenGlyphs[glyphPos[x + 1]-1]+'.png">';
 						document.getElementById("g"+(x+1)).style.color = "Red";
 					}
 					//After four glyph buttons make a new line
