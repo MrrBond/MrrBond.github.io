@@ -82,7 +82,7 @@
 				}
 
 				//Choose four or five glyphs to use for the puzzle, out of 16 glyph images
-				for(x = 0; x < difficulty; x++){//=================================Difficulty
+				for(x = 0; x < difficulty; x++){
 					do{
 						chosenGlyphs[x] = GPInit[Math.floor((Math.random() * 16) - x)];
 					}
@@ -91,8 +91,7 @@
 					glyphPics[x] = '<img src "Pics/Glyph'+chosenGlyphs[x]+'">';
 					redGlyphPics[x] = '<img src "Pics/RGlyph'+chosenGlyphs[x]+'">';
 				}
-				console.log(chosenGlyphs);
-				console.log(glyphPics);
+				
 				if(isTry == 1){
 					document.getElementById("subClick").src = "Pics/ButtonSubText.png";
 				}
@@ -120,9 +119,8 @@
 						for (x = 0; x < difficulty; x++){
 							ArrA1[x] = Nums[Math.floor(Math.random() * Nums.length)];
 							Nums.splice(Nums.indexOf(ArrA1[x]), 1);
-							console.log(ArrA1[x]);
 						}
-					console.log("---");
+						
 						//Second line of numbers/glyphs. Need to double check for column duplicates
 						do{
 							if(difficulty == 4){
@@ -146,7 +144,6 @@
 								//This checks each number with the one above and if they are the same, choose a different number.
 								while(ArrB1[x] == ArrA1[x]);
 								Nums.splice(Nums.indexOf(ArrB1[x]), 1);
-								console.log(ArrB1[x]);
 							}
 						}
 						//If the last numbers are the same, start over and choose 4 different numbers.
@@ -184,7 +181,6 @@
 					}
 					while((Box1 != 15) || (boxOfFive.length != 0));
 					
-				console.log("---2");
 					//Third line of numbers/glyphs
 					do{
 						if(difficulty == 4){
@@ -214,11 +210,9 @@
 							//Have to check with both numbers above current one
 							while((ArrC1[x] == ArrA1[x]) || (ArrC1[x] == ArrB1[x]));
 							Nums.splice(Nums.indexOf(ArrC1[x]), 1);
-							console.log(ArrC1[x]);
 						}
 					}
 					while((ArrC1[2] == ArrA1[2]) || (ArrC1[2] == ArrB1[2]) || (ArrC1[3] == ArrA1[3]) || (ArrC1[3] == ArrB1[3]) || (ArrC1[4] == ArrA1[4]) || (ArrC1[4] == ArrB1[4]));//=====================Diff
-				console.log("---3");
 					
 					//Fourth line of numbers/glyphs
 					do{
@@ -248,11 +242,9 @@
 										break;
 									}
 								}
-								console.log("check");
 							}
 							while((ArrD1[x] == ArrA1[x]) || (ArrD1[x] == ArrB1[x]) || (ArrD1[x] == ArrC1[x]));
 							Nums.splice(Nums.indexOf(ArrD1[x]), 1);
-							console.log(ArrD1[x]);
 						}
 						if(difficulty == 5){
 							if((ArrD1[4] == ArrA1[4]) || (ArrD1[4] == ArrB1[4]) || (ArrD1[4] == ArrC1[4])){
@@ -274,7 +266,7 @@
 						}
 					}
 					while((ArrD1[difficulty - 1] == ArrA1[difficulty - 1]) || (ArrD1[difficulty - 1] == ArrB1[difficulty - 1]) || (ArrD1[difficulty - 1] == ArrC1[difficulty - 1]) || (lineFour_Five == 1));//==============================
-				console.log("---4")
+					
 					//Fifth line of glyphs (if applicable)
 					if(difficulty == 5){
 						do{
@@ -300,7 +292,6 @@
 								}
 								while((ArrE1[x] == ArrA1[x]) || (ArrE1[x] == ArrB1[x]) || (ArrE1[x] == ArrC1[x]) || (ArrE1[x] == ArrD1[x]));
 								Nums.splice(Nums.indexOf(ArrE1[x]), 1);
-								console.log(ArrE1[x]);
 							}
 						
 							if((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4])){
@@ -321,9 +312,8 @@
 							}
 						}
 						while(lineFour_Five == 1);
-						//while((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4]));
 					}
-				console.log("---5");
+					
 					if(difficulty == 4){
 						Box1 = ArrA1[0] + ArrA1[1] + ArrB1[0] + ArrB1[1];
 						Box2 = ArrA1[2] + ArrA1[3] + ArrB1[2] + ArrB1[3];
@@ -340,10 +330,9 @@
 						Box3 = ArrB1[2] + ArrC1[1] + ArrC1[2] + ArrC1[3] + ArrD1[2];
 						Box4 = ArrC1[0] + ArrD1[0] + ArrD1[1] + ArrE1[0] + ArrE1[1];
 						Box5 = ArrD1[3] + ArrD1[4] + ArrE1[2] + ArrE1[3] + ArrE1[4];
-						console.log("__________________________"+Box1+" "+Box2+" "+Box3+" "+Box4+" "+Box5+"__________CHECKING BOXES");
+						
 						if((Box1 == 15) && (Box2 == 15) && (Box3 == 15) && (Box4 == 15) && (Box5 == 15)){
 							check3 = 1;
-							console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Should Move ON");
 						}
 						if((ArrE1[4] == ArrA1[4]) || (ArrE1[4] == ArrB1[4]) || (ArrE1[4] == ArrC1[4]) || (ArrE1[4] == ArrD1[4])){
 							check3 = 0;
@@ -355,24 +344,13 @@
 							check3 = 0;
 						}
 					}
-				
-					/*if((Box1 == 10) && (Box2 == 10) && (Box3 == 10) && (Box4 == 10)){
-						check3 = 1;
-					}*/
 				}
 				while(check3 != 1);
-				
-				console.log(ArrA1);
-				console.log(ArrB1);
-				console.log(ArrC1);
-				console.log(ArrD1);
-				console.log(ArrE1);
 				
 				for(x = 0; x < (totalGlyphs - 1); x++){
 					hideGlyphs.push(x + 1);
 					glyphPos[x] = x;
 					glyphPos.push(x + 1);
-					console.log(glyphPos[x]);
 				}
 				if(difficulty == 4){
 					hidden = Math.floor(Math.random() * 3) + 10;
@@ -381,7 +359,6 @@
 					hidden = Math.floor(Math.random() * 4) + 16;
 				}
 				for(x = 0; x < hidden; x++){
-					console.log(x);
 					hideGlyphs.splice(hideGlyphs.indexOf(Math.floor(Math.random() * hideGlyphs.length)), 1);
 				}
 				
@@ -455,13 +432,11 @@
 					if((x + 2) % difficulty == 0){
 						document.getElementById("board").innerHTML += "<br>"
 					}
-					console.log(glyphPos[x], "---", x);
 				}
 			}
 			
 			//Changes to the next glyph (out of four or five) when a glyph is clicked
 			function glyphCycle(glyph, pid, diff){
-				console.log(glyph, pid);
 				if(glyph < diff){
 					glyph++;
 					glyphPos[pid] = glyph;
@@ -473,17 +448,12 @@
 					glyph++;
 					glyphPos[pid] = glyph;
 					document.getElementById("g"+pid).src = "Pics/Glyph0.png";
-					/*glyph = 1;
-					glyphPos[pid] = glyph;
-					document.getElementById("g"+pid).src = "Pics/Glyph"+chosenGlyphs[glyph-1]+".png";*/
 				}
 				else if(glyph > diff){
 					glyph = 1;
 					glyphPos[pid] = glyph;
 					document.getElementById("g"+pid).src = "Pics/Glyph"+chosenGlyphs[glyph-1]+".png";
 				}
-				console.log(glyph, "--");
-				console.log(glyphPos[pid])
 				if(isTry == 1){
 					document.getElementById("subClick").src = "Pics/ButtonSubText.png";
 				}
@@ -497,21 +467,6 @@
 				var B1, B2, B3, B4, B5;
 				
 				var isCorrect = 0;
-				
-				/*for(x = 0; x < 4; x++){
-					if(glyphPos[x] == ArrA1[x]){
-						isCorrect++;
-					}
-					if(glyphPos[x+4] == ArrB1[x]){
-						isCorrect++;
-					}
-					if(glyphPos[x+8] == ArrC1[x]){
-						isCorrect++;
-					}
-					if(glyphPos[x+12] == ArrD1[x]){
-						isCorrect++;
-					}
-				}*/
 				
 				if(difficulty == 4){
 					RA = glyphPos[0] + glyphPos[1] + glyphPos[2] + glyphPos[3];
@@ -569,45 +524,17 @@
 					}
 				}
 				
-				console.log("========", isCorrect);
 				//Displays the winner screen if the player wins
 				if(isCorrect == 3){
 					document.getElementById("board").innerHTML = '<img src = "Pics/Success.png">';
 					document.getElementById("board").style.margin = "365px 0px 63px 0px";
 					document.getElementById("subClick").src = "Pics/ButtonSubText.png";
-					console.log("WINNER!");
 				}
 				
 				else{
-					console.log("change");
 					document.getElementById("subClick").src = "Pics/tryAgain.png";
 					isTry = 1;
 				}
-				
-				/*var columns = [0, 0, 0, 0];
-				var rows = [0, 0, 0, 0];
-				var boxes = [0, 0, 0, 0];
-				var x;
-				
-				for(x = 0; x < 4; x++){
-					columns[x] = ArrA1[x] + ArrB1[x] + ArrC1[x] + ArrD1[x];
-				}
-				rows[0] = ArrA1[0] + ArrA1[1] + ArrA1[2] + ArrA1[3];
-				rows[1] = ArrB1[0] + ArrB1[1] + ArrB1[2] + ArrB1[3];
-				rows[2] = ArrC1[0] + ArrC1[1] + ArrC1[2] + ArrC1[3];
-				rows[3] = ArrD1[0] + ArrD1[1] + ArrD1[2] + ArrD1[3];
-				
-				boxes[0] = ArrA1[0] + ArrA1[1] + ArrB1[0] + ArrB1[1];
-				boxes[1] = ArrA1[2] + ArrA1[3] + ArrB1[2] + ArrB1[3];
-				boxes[2] = ArrC1[0] + ArrC1[1] + ArrD1[0] + ArrD1[1];
-				boxes[3] = ArrC1[2] + ArrC1[3] + ArrD1[2] + ArrD1[3];
-				
-				if((columns[0] == 10) && (columns[1] == 10) && (columns[2] == 10) && (columns[3] == 10)){
-					console.log("hi");
-				}
-				if((rows[0] == 10) && (rows[0] == 10) && (rows[0] == 10) && (rows[0] == 10)){
-					
-				}*/
 			}
 			
 			//...Changes the difficulty
@@ -626,17 +553,7 @@
 					document.getElementById("board").style.margin = "398px 0px 88px 0px";
 					NewBoard();
 				}
-				console.log(difficulty);
 			}
-			
-			/*function loadScreen(){
-				if(difficulty == 5){
-					document.getElementById("board").innerHTML = '<img src = "Pics/Loading.png">';
-					document.getElementById("board").style.margin = "365px 0px 63px 0px";
-					console.log("loadingggggggggggggggg");
-				}
-			}*/
-			
 		</script>
 		
 	</head>
